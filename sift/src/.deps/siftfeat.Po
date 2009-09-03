@@ -1,0 +1,86 @@
+siftfeat.o siftfeat.o: siftfeat.c sift.h \
+  /usr/local/include/opencv/cxcore.h /usr/local/include/opencv/cxtypes.h \
+  /usr/include/assert.h /usr/include/sys/cdefs.h /usr/include/stdlib.h \
+  /usr/include/sys/_null.h /usr/include/sys/_types.h \
+  /usr/include/machine/_types.h /usr/include/string.h \
+  /usr/include/strings.h /usr/include/float.h /usr/include/emmintrin.h \
+  /usr/include/xmmintrin.h /usr/include/mmintrin.h /usr/include/math.h \
+  /usr/include/machine/_limits.h /usr/local/include/opencv/cxerror.h \
+  /usr/local/include/opencv/cvver.h imgfeatures.h /usr/include/stdio.h \
+  utils.h /usr/include/dirent.h /usr/include/sys/dirent.h \
+  /usr/local/include/opencv/highgui.h /usr/local/include/opencv/cxcore.h \
+  /usr/include/unistd.h /usr/include/sys/types.h \
+  /usr/include/machine/endian.h /usr/include/sys/_pthreadtypes.h \
+  /usr/include/sys/select.h /usr/include/sys/_sigset.h \
+  /usr/include/sys/_timeval.h /usr/include/sys/timespec.h \
+  /usr/include/sys/unistd.h
+
+sift.h:
+
+/usr/local/include/opencv/cxcore.h:
+
+/usr/local/include/opencv/cxtypes.h:
+
+/usr/include/assert.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/sys/_null.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/string.h:
+
+/usr/include/strings.h:
+
+/usr/include/float.h:
+
+/usr/include/emmintrin.h:
+
+/usr/include/xmmintrin.h:
+
+/usr/include/mmintrin.h:
+
+/usr/include/math.h:
+
+/usr/include/machine/_limits.h:
+
+/usr/local/include/opencv/cxerror.h:
+
+/usr/local/include/opencv/cvver.h:
+
+imgfeatures.h:
+
+/usr/include/stdio.h:
+
+utils.h:
+
+/usr/include/dirent.h:
+
+/usr/include/sys/dirent.h:
+
+/usr/local/include/opencv/highgui.h:
+
+/usr/local/include/opencv/cxcore.h:
+
+/usr/include/unistd.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/sys/_pthreadtypes.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/sys/_sigset.h:
+
+/usr/include/sys/_timeval.h:
+
+/usr/include/sys/timespec.h:
+
+/usr/include/sys/unistd.h:

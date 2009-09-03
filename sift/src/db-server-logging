@@ -1,0 +1,1 @@
+./sift/bin/db-server 5555 imagewiki.db

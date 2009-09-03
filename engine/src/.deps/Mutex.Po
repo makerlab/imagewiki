@@ -1,0 +1,30 @@
+Mutex.o Mutex.o: Mutex.cpp Mutex.hpp /usr/include/pthread.h \
+  /usr/include/sys/cdefs.h /usr/include/sys/_pthreadtypes.h \
+  /usr/include/machine/_limits.h /usr/include/machine/_types.h \
+  /usr/include/sys/_sigset.h /usr/include/sched.h \
+  /usr/include/sys/_types.h /usr/include/time.h /usr/include/sys/_null.h \
+  /usr/include/sys/timespec.h
+
+Mutex.hpp:
+
+/usr/include/pthread.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/sys/_pthreadtypes.h:
+
+/usr/include/machine/_limits.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/sys/_sigset.h:
+
+/usr/include/sched.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/_null.h:
+
+/usr/include/sys/timespec.h:

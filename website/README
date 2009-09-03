@@ -1,0 +1,4 @@
+# Merb has changed...
+
+# blow your db away and remake
+rake MERB_ENV=development db:migrate

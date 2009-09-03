@@ -1,0 +1,15 @@
+<div style="margin-left:30px;">
+<div style="border:1px solid blue;padding:4px;width:300px;">
+<h1>Change your password?</h1>
+<br/>
+<%= error_messages_for :user %>
+<%= form_for(:user, :action => "/change", :method=>"post", :enctype => "multipart/form-data" ) do %>
+<p><label for="password">Password</label><br/>
+<%= password_field :password %></p>
+<p><%= submit 'Save' %></p>
+<% end =%>
+</div>
+</div>
+
+
+

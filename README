@@ -1,0 +1,74 @@
+ImageWiki MERB Version.
+
+Version 0.1
+Last update: Aug 15 2008
+Anselm Hook
+Ben Foote
+John Wiseman
+Marlin Pohlman
+Paige Saez
+Nick Brennr
+
+======
+About
+======
+
+An open source BSD licensed image comparison project from the makerlab.
+See http://imagewiki.org and http://makerlab.com / http://makerlab.org
+
+This repository is a migration of our existing code from svn.makerlab.org .
+
+We are switching to github because we think it is better.
+
+Also this is a code rewrite into merb from rails.
+
+Please feel free to support us or provide feedback.  You can email me at:
+
+  anselm@hook.org
+  anselm@makerlab.com
+
+============
+Contents
+============
+
+/website - this is the merb site itself
+          currently this is a vanilla mvc pattern
+          we'll probably use merb slices later
+
+/engine - this is a standalone c based comparator engine
+          it uses the sift algorithm and features a scaleable datastore
+
+/iphone - this is the iphone client; a native client for the iphone
+          it is based on iflickr.
+
+============
+INSTALLATION
+============
+
+1) Merb is slightly less unstable - see "gem_list.txt" for a list of gems.
+
+2) Merb has ever changing ways of doing migrations:
+
+   cd website
+   rake MERB_ENV=development db:automigrate
+
+3) To run the merb side do this:
+
+   cd website
+   merb >& merb_logging_file.log &
+
+4) There is a C/C++ standalone engine you must also run - here is the incantation for building and running it - you need to build opencv first among other things:
+
+   echo "setting the pkg config path is so important btw"
+
+   setenv PKG_CONFIG_PATH /usr/local/lib/pkgconfig
+   cd engine/src
+   configure 
+   make
+   cd ../..
+   engine/src/db-add image.db test.jpg testlabel
+   engine/src/db-server 4444 image.db >& engine_logging_file.log &
+
+5) There was an iphone client - it has a makefile also - see the iphone folder.  Now it is obsolete and needs to be moved to the latest version of the iphone - anybody want to do that?
+
+6) Note that the db ip port is hard coded in app/models/note.rb to be 4444
