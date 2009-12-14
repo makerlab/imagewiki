@@ -1,0 +1,7 @@
+<h1>Here is our best match on your search query</h1>
+<h1>Is this what you are looking for?</h1>
+<%=
+@limit = 1
+@results = Note.find_similar(@note)
+partial "notes/walk" 
+%>

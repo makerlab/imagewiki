@@ -1,0 +1,26 @@
+<div id="addImage">
+<h1>Add an image!</h1>
+<%= error_messages_for :note %>
+<%= form_for(:note,:action=>'added',:method=>"post",:enctype =>"multipart/form-data") do %>
+
+<p><label for="image">Add an image from your computer</label><br/>
+<%= file_field :depiction, :size=>35 %></p>
+
+<p><label for="image">Or add an image from the internet via the URL</label><br/>
+<%= text_field :link, :size=>35 %></p>
+
+<p><label for="image">Give your image a title!:</label><br/>
+<%= text_field :title %>
+
+<p><label for="image">Tell us about your image!:</label><br/>
+<%= text_field :description, :cols=>50, :rows=>5 %>
+
+<%= hidden_field :lat %>
+<%= hidden_field :lon %>
+
+<br/>
+<br/>
+
+<%= submit 'add your image' %>
+<% end =%>
+</div>

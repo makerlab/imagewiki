@@ -1,0 +1,9 @@
+<h1>You searched for</h1>
+<%= partial "notes/thumb" %>
+<div style="clear:both;"></div>
+<h1>Here are some images that were similar to what you were looking for</h1>
+<%=
+@limit = 3
+@results = Note.find_similar(@note)
+partial "notes/walk" 
+%>

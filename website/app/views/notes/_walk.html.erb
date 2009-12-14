@@ -1,0 +1,61 @@
+<center>
+<div>
+<%
+
+if !defined?(@promoted)
+  @promoted = 1
+else
+  @promoted = 0
+end
+
+if params[:limit]
+  @limit = params[:limit].to_i
+end
+if !defined?(@limit)
+  @limit = 20
+end
+
+if params[:offset]
+  @offset = params[:offset].to_i
+end
+if !defined?(@offset)
+  @offset = 0
+end
+
+if defined?(@render_searches)
+  @total = Note.count
+else
+  # TODO count should be filtered on the query style
+  @total = Note.count
+end
+
+if !defined?(@results) || @results == nil
+  @results = Note.all(:promoted => @promoted,
+                      :order => [:id.desc],
+                      :limit => @limit,
+                      :offset => @offset
+                     )
+end
+
+# print a certain width of elements
+@width = 999 
+@count = 0
+
+# print all
+@results.each do |@note|
+ @count = (@count+1).modulo(@width) 
+ break if @count > @limit
+%>
+ <%= partial "notes/thumb" %>
+ <% if @count == 0 %>
+  <div style="clear:both;"></div>
+ <% end %>
+<% end %>
+
+<% if @count != 0 %>
+<div style="clear:both;"></div>
+<% end %>
+
+<% @results = nil %>
+</div>
+</center>

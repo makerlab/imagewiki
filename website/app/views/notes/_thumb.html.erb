@@ -1,0 +1,43 @@
+<%
+
+
+# File actionpack/lib/action_view/helpers/text_helper.rb, line 166
+def pluralize(count, singular)
+  "#{count || 0} " + ((count == 1 || count == '1') ? singular : ("#{singular}s"))
+end
+
+-%>
+<div id="thumb" style="position:relative;">
+<font size=1>
+<a href="/notes/<%=@note.id%>"><div id="thumbinner"><img id="imginner" alt="<%@note.title%>" src="/<%=IMAGEDB_FOLDER%>/<%=@note.id%>.thumb.jpg" /></div></a>
+<h3>
+<%= @note.title %></h3> 
+<%
+u = User.first(:id => @note.user_id)
+@username = "unknown"
+@username = u.login if u
+%>
+from <a href="/users/<%=@username%>"><%=@username%></a><br/>
+<%=pluralize(@note.nobservers,"view")%><br/>
+<% if @note.radius && @note.radius >= 0 %>
+Similarity <%= @note.radius.to_i || "0" %>%<br/>
+<% end %>
+<% if defined?(@current_user) && @current_user != nil && (!@note.is_searchable? || @note.user_id != @current_user.id )
+  # allow bookmarking (saving) if it is not one of yours or just a search
+%>
+<a href="/notes/<%=@note.id%>">[read comments]</a>
+<% end %>
+<!-- <a href="/notes/map/<%=@note.id%>">[map]</a> -->
+<% if defined?(@current_user) && @current_user != nil && @note.may_delete(@current_user) %>
+<a href="/notes/destroy/<%=@note.id%>"><font color="red">[delete]</font></a>
+<a href="/notes/edit/<%=@note.id%>"><font color="black">[edit]</font></a>
+<% end %>
+<br/>
+<%=@note.created_at%>
+<%
+# TODO what
+# utc.strftime("%Y/%m/%d %I:%M%p")
+-%>
+<br/>
+</font>
+</div>

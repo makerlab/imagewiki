@@ -1,0 +1,123 @@
+<!-- a separate page for performance reasons -->
+
+<%
+ @note = Note.new # TODO better
+%>
+
+<table width=100%><tr>
+ <td width=40% valign=top>
+  <h1>&nbsp;Please submit your advanced search</h1>
+
+  <% form_for(:note,:url => { :action => 'advanced', :id => @note } ,
+              :html => { :multipart => true } ) do |f| -%>
+
+   <table>
+     <tr><td valign=top align=right>Name</td>
+     <td><%= f.text_field :slug, :size=>30 %><br/>
+     <small>This must be a string consisting only of lower case characters and no spaces. If you don't specify a unique identifier the system will create one for you.</small>
+     </td></tr>
+     <tr><td valign=top align=right>Title</td><td><%= f.text_field :title, :size=>40 %></td></tr>
+     <tr><td valign=top align=right>Link</td><td><%= f.text_field :link , :size=>47 %></td></tr>
+     <tr><td valign=top align=right>Comments</td><td><%= f.text_area :description, :cols=>50, :rows=>5 %></td></tr>
+     <tr><td valign=top align=right>Tags</td><td><%= f.text_field :tagstring, :size=>47 %></td></tr>
+     <tr><td valign=top align=right>Location</td><td><%= f.text_field :location, :size=>40 %></td></tr>
+     <tr><td valign=top align=right><A HREF="#"
+                 onclick="cal1x.select(document.forms[0].note_begins,'anchor1x','yyyy-MM-dd');
+		                               return false;"
+                 title="cal1x.select(document.forms[0].note_begins,'anchor1x','yyyy-MM-dd');
+                        return false;">Begins?</a>
+	  </td><td>
+      <%= f.text_field :begins, :size=>35 %>
+	  <a name="anchor1x" id="anchor1x"></a>
+      </td></tr>
+
+      <tr><td valign=top align=right><A HREF="#"
+                 onclick="cal1x.select(document.forms[0].note_ends,'anchor2x','yyyy-MM-dd');
+		                  return false;"
+		         title="cal1x.select(document.forms[0].note_ends,'anchor2x','yyyy-MM-dd');
+		                return false;">Ends?</a>
+      </td><td>
+      <%= f.text_field :ends, :size=>35 %>
+      <a name="anchor2x" id="anchor2x"></a>
+      </td></tr>
+
+      <tr><td valign=top align=right>Depiction?</td><td><%= f.file_field :depiction, :size=>30 %></td></tr>
+
+      <tr><td valign=top align=right>Permissions?</td><td>
+      <select name="perms" id="perms">
+      <option value="0" >Public</option>
+      <option <%=@note.perms!=1||"selected"%> value="1">Protected (Read Only)</option>
+      <option <%=@note.perms!=2||"selected"%> value="2">Private</option>
+      <option <%=@note.perms!=3||"selected"%> value="3">Private + Read Only</option>
+      </td></tr>
+
+<tr><td valign=top align=right>Filter by?</td><td>
+<input type="radio" name="group" value="mine">mine<br>
+<input type="radio" name="group" value="friends">friends<br>
+<input type="radio" name="group" value="all" checked>all<br/>
+</td>
+
+     <tr><td></td><td>
+        <%= f.hidden_field :lat %>
+        <%= f.hidden_field :lon %>
+        <%= submit_tag 'I feel lucky!' %>
+        <%= submit_tag 'Search' %>
+     </td></tr>
+   </table>
+  <% end %>
+ </td>
+ <td width=50% valign=top align=left>
+  <h1>&nbsp;&nbsp;Adjust map location</h1>
+  <div id="map" style="margin:10px; width:90%; height:400px"></div>
+ </td>
+</table>
+
+<script src="/javascripts/calendar.js"></script>
+<DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+<DIV ID="testdiv2" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
+<script LANGUAGE="JavaScript" ID="jscal1x">
+var cal1x = new CalendarPopup("testdiv1");
+var cal2x = new CalendarPopup("testdiv2");
+</script>
+
+<script src="http://openlayers.org/api/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+
+  var markers;
+  var marker;
+  var map;
+  var wms;
+  var canvas;
+
+  function paint_marker(lon,lat) {
+    var artwork = "/icons/emblem-important.png";
+    var lonlat = new OpenLayers.LonLat(lon,lat);
+    var iconsz = new OpenLayers.Size(32,32); 
+    var icon   = new OpenLayers.Icon(artwork,iconsz);
+    if(marker) markers.removeMarker(marker);
+    marker = new OpenLayers.Marker(lonlat,icon);
+    markers.addMarker(marker);
+  };
+
+  function map_startup() {
+      map = new OpenLayers.Map('map');
+      wms = new OpenLayers.Layer.WMS( "OpenLayers WMS","http://labs.metacarta.com/wms-c/anselm.py", {layers: 'basic'} );
+      map.addLayer(wms);
+      markers = new OpenLayers.Layer.Markers("Some points of interest");
+      map.addLayer(this.markers);
+      map.setCenter( new OpenLayers.LonLat(0,0),2);
+      map.events.register("moveend", null, function() {
+         var center = map.getCenter();
+         var zoom = map.getZoom();
+         var bounds = map.getExtent();
+         // xxx turns out bounds are not that useful; maybe get radius; modify db?
+         document.getElementById("note_lat").value = center.lat;
+         document.getElementById("note_lon").value = center.lon;
+         document.getElementById("note_location").value = center.lat + " " + center.lon;
+         paint_marker(center.lon,center.lat);
+       } );
+      paint_marker(0,0);
+  }
+  map_startup();
+</script>
+

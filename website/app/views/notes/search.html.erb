@@ -1,0 +1,22 @@
+<h1>Add an image to start your search</h1>
+<i><br>
+Got an image and want to find out if we have it catalogued yet? 
+<br>
+Search for a match in our database of images.<br>
+<br>If we don't have your image in the database already it will be added automatically!
+</i>
+<%= error_messages_for :note %>
+<br>
+<%= form_for(:note, :action => "/search", :method => "post", :enctype => "multipart/form-data" ) do -%>
+<br>
+<p><label for="image">Select an image from your computer</label><br/>
+<%= file_field :depiction %></p>
+
+<p><label for="image">Or add an image link from the internet via URL:</label><br/>
+<%= text_field :link %></p>
+
+<p><label for=" "> </label>
+<%= submit 'Search for an image match now!' %></p>
+
+<% end =%> 
+

@@ -1,3 +1,6 @@
+website/public/imagedb/*
+website/scratch
+engine/src/*.o
 image.db
 engine_logging_file.log
 .DS_Store

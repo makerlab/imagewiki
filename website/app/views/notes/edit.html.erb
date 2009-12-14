@@ -1,0 +1,19 @@
+<h1>&nbsp;Tell us about this image</h1>
+<br>
+
+<%= partial "notes/thumb" %>
+<div style="clear:both"></div>
+
+<%= form_for(:note,:action=>"/notes/added/#{@note.id}",:method=>"post",:enctype =>"multipart/form-data") do %>
+
+<p><label for="image">Set a new title:</label><br/>
+<%= text_field :title %>
+
+<p><label for="image">Set new description:</label><br/>
+<%= text_area :description, :cols=>50, :rows=>5 %>
+<br/>
+<%= submit 'Save changes' %>
+<% end =%>
+</div>
+
+

@@ -1,0 +1,58 @@
+<%
+
+# Render a map view of notes from a filter and paginate
+# supply
+#  @filter = a crude filter for now
+#  @current_user = handle on current user if any (helps with marking thumbs)
+#  params ... from the httpd environment for various odds and ends
+#
+
+@limit = params[:limit] || 20
+@offset = params[:offset] || 0
+@total = Note.count(:all,:conditions => @conditions )
+
+if defined?(@results) && @results != nil
+else
+  @mapresults = Note.find(:all,
+                     :limit => @limit,
+                     :offset => @offset,
+                     :order => "id DESC",
+                     :conditions => @conditions );
+end
+
+%>
+
+<div id="map" style="margin:10px; width:400px; height:400px"></div>
+
+<script src="http://openlayers.org/api/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+
+  var markers;
+  var marker;
+  var map;
+  var wms;
+  var canvas;
+
+  function paint_marker(lon,lat) {
+    var artwork = "/icons/emblem-important.png";
+    var lonlat = new OpenLayers.LonLat(lon,lat);
+    var iconsz = new OpenLayers.Size(32,32); 
+    var icon   = new OpenLayers.Icon(artwork,iconsz);
+    marker = new OpenLayers.Marker(lonlat,icon);
+    markers.addMarker(marker);
+  };
+
+  function map_startup() {
+      map = new OpenLayers.Map('map');
+      wms = new OpenLayers.Layer.WMS( "OpenLayers WMS","http://labs.metacarta.com/wms-c/anselm.py", {layers: 'basic'} );
+      map.addLayer(wms);
+      markers = new OpenLayers.Layer.Markers("Some points of interest");
+      map.addLayer(this.markers);
+      map.setCenter( new OpenLayers.LonLat(0,0) , 2 );
+  }
+map_startup();
+<% @mapresults.each do |note| %>
+paint_marker(<%=note.lon||"0"%>,<%=note.lat||"0"%>);
+<% end %>
+</script>
+

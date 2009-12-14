@@ -1,0 +1,114 @@
+<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAmxDIRcelCE7QQOeFeIJlKBQbC7YFAVypnexbQVpIxrc0xOL31RQB1VrsQ2GjNdD74FiXxxkBwYFgUw'></script>
+
+<h1>Image Detail Page</h1>
+<%= partial :thumb %>
+<% if @note.description %>
+<%= escape_html(@note.description[0,60]) + "..." %>
+<% end %>
+<div style="clear:both;"></div>
+<!--
+<h1>Actions</h1>
+<a href="bookmark">Bookmark</a>
+<a href="buy">Buy</a>
+<a href="sell">Sell</a>
+<a href="rss">RSS</a>
+<a href="">good</a>
+<a href="">bad</a>
+-->
+<h1>Comments</h1>
+<% 
+ @comments = @note.get_comments
+ @commentcount = 0
+ if @comments
+   @comments.each do |comment|
+     @commentcount = @commentcount + 1
+     login = User.first(:id => comment.user_id)
+     login = login.login if login
+     login = "" if !login
+     comment = comment.value
+%>
+<div id="comment"><a href="/users/<%=login%>"><%=login%></a> said <%=comment %></div>
+<br/>
+<%
+   end 
+ end
+%>
+<br/>
+
+<% if @current_user != nil && @current_user.class == User %>
+Add a comment:<br/>
+<%= form_for(:note, :action => "/notes/comment/#{@note.id}",:method=>"post",:enctype =>"multipart/form-data" ) do %>
+      <%= text_area "", :name => "comments", :label => "Comments" %>
+      <%= hidden_field :label => :lat %>
+      <%= hidden_field :label => :lon %>
+      <br/>
+      <%= submit 'add your comment' %>
+<% end =%>
+<% else %>
+(please <a href="/signup">signup</a> to add comments)
+<% end %>
+
+<h1>Similar Images:</h1>
+<%=
+@limit = 3
+@results = Note.find_similar(@note)
+partial :walk
+%>
+
+<!--
+
+<div id="map" style="margin:10px; width:90%; height:400px"></div>
+
+<script src="http://openlayers.org/api/OpenLayers.js"></script>
+<script defer="defer" type="text/javascript">
+
+  var markers;
+  var marker;
+  var map;
+  var wms;
+  var canvas;
+
+  function paint_marker(lon,lat) {
+    var artwork = "/icons/emblem-important.png";
+    var lonlat = new OpenLayers.LonLat(lon,lat);
+    var iconsz = new OpenLayers.Size(32,32); 
+    var icon   = new OpenLayers.Icon(artwork,iconsz);
+    if(marker) markers.removeMarker(marker);
+    marker = new OpenLayers.Marker(lonlat,icon);
+    markers.addMarker(marker);
+    map.setCenter( new OpenLayers.LonLat(lon,lat),8);
+  };
+
+  function map_startup() {
+      map = new OpenLayers.Map('map');
+//      wms = new OpenLayers.Layer.WMS( "OpenLayers WMS","http://labs.metacarta.com/wms-c/anselm.py", {layers: 'basic'} );
+
+
+            wms = new OpenLayers.Layer.Google(
+                "Google Streets" // the default
+            );
+
+      map.addLayer(wms);
+      markers = new OpenLayers.Layer.Markers("Some points of interest");
+      map.addLayer(this.markers);
+      map.setCenter( new OpenLayers.LonLat(0,0),2);
+      map.events.register("moveend", null, function() {
+         var center = map.getCenter();
+         var zoom = map.getZoom();
+         var bounds = map.getExtent();
+         document.getElementById("note_lat").value = center.lat;
+         document.getElementById("note_lon").value = center.lon;
+         if(center.lon < 1 || center.lat < 1 || true ) {
+           center.lon = -122;
+           center.lat = 43;
+         }
+         paint_marker(center.lon,center.lat);
+       } );
+  }
+  map_startup();
+  paint_marker(<%=@note.lon||"-122.67"%>,<%=@note.lat||"45.52"%>);
+</script>
+
+-->
+
+
