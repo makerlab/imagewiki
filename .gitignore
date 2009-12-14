@@ -1,6 +1,5 @@
 image.db
 engine_logging_file.log
-notes
 .DS_Store
 public/text/*.pdf
 .svn

@@ -715,11 +715,13 @@ puts "trying to store #{a} and #{b}"
 
       # force through imagemagick from any format into jpg
       # XXX TODO fix singlethreaded
-      %x[convert scratch #{fname}.jpg]
-      
+      %x[/usr/local/bin/convert scratch #{fname}.jpg]
+      raise "Internal error did not save #{fname}" if !File.exist?("#{fname}.jpg")
+ 
       # force through imagemagick from any format into bmp
       # XXX TODO fix singlethreaded
-      %x[convert scratch #{fname}.bmp]
+      %x[/usr/local/bin/convert scratch #{fname}.bmp]
+      raise "Internal error failed to save #{fname}" if !File.exist?("#{fname}.jpg")
 
       # associate depiction in url space
       depiction = relative_url_fragment_to_jpg()
@@ -749,21 +751,21 @@ puts "trying to store #{a} and #{b}"
     def save_thumbnail
       full_res_path = path_to_jpg()
       thumbnail_path = path_to_thumbnail()
-      %x[convert #{full_res_path} -strip -coalesce -resize 128x128 -quality 85 #{thumbnail_path}]
+      %x[/usr/local/bin/convert #{full_res_path} -strip -coalesce -resize 128x128 -quality 85 #{thumbnail_path}]
       # there were some issues with permissions; just hack past this
-      %x[chmod 777 #{thumbnail_path}]
-      %x[chmod 777 #{full_res_path}]
+      %x[/bin/chmod 777 #{thumbnail_path}]
+      %x[/bin/chmod 777 #{full_res_path}]
       # circumvent some memory leaks for good luck
       GC.start
     end
 
     def save_sift_image
       # make a depiction of the SIFT so we can see what the sucker looks like
-      %x[siftfeat -x -o #{fname}.sift #{fname}.bmp]
+      %x[/www/sites/imagewiki/engine/src/siftfeat -x -o #{fname}.sift #{fname}.bmp]
       # make sketch of what the SIFT looks like (JPG out is broken here too)
-      %x[siftfeat -x -m #{fname}.sift.bmp #{fname}.bmp]
-      %x[convert #{fname}.sift.bmp #{fname}.sift.jpg]
-      %x[convert -size 128x128 #{fname}.sift.jpg -strip -coalesce -resize 128x128 -quality 100 #{fname}.sift.thumb.jpg]
+      %x[/www/sites/imagewiki/engine/src/siftfeat -x -m #{fname}.sift.bmp #{fname}.bmp]
+      %x[/usr/local/bin/convert #{fname}.sift.bmp #{fname}.sift.jpg]
+      %x[/usr/local/bin/convert -size 128x128 #{fname}.sift.jpg -strip -coalesce -resize 128x128 -quality 100 #{fname}.sift.thumb.jpg]
       # Add the image to the SIFT db.
     end
 
@@ -818,12 +820,12 @@ puts "trying to store #{a} and #{b}"
 
     def Note.find_similar_older(target)
       # hack; compare it to itself to get a baseline expectation
-      v = %x[match public/#{IMAGEDB_FOLDER}/#{target.id}.sift public/#{IMAGEDB_FOLDER}/#{target.id}.sift]
+      v = %x[/www/sites/imagewiki/engine/src/db-match public/#{IMAGEDB_FOLDER}/#{target.id}.sift public/#{IMAGEDB_FOLDER}/#{target.id}.sift]
       baseline = v.to_f
       results = []
       all = Note.all(:promoted => 1 )
       all.each do |x|
-        v = %x[match public/#{IMAGEDB_FOLDER}/#{target.id}.sift public/#{IMAGEDB_FOLDER}/#{x.id}.sift]
+        v = %x[/www/sites/imagewiki/engine/src/db-match public/#{IMAGEDB_FOLDER}/#{target.id}.sift public/#{IMAGEDB_FOLDER}/#{x.id}.sift]
         v = v.to_f
         x.radius = v.to_i
         results.push(x)

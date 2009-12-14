@@ -45,7 +45,10 @@ Contents
 INSTALLATION
 ============
 
+0) There are some hard coded paths in app/models/note.rb - see the %x[convert] and the like - these are externalized at the moment - you have to change them for your hardware.
+
 1) Merb is slightly less unstable - see "gem_list.txt" for a list of gems.
+   I suggest using passenger phusion now.
 
 2) Merb has ever changing ways of doing migrations:
 
