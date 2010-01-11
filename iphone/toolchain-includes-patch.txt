@@ -1,0 +1,19 @@
+*** UISliderControl.h.orig	Tue Sep  4 17:39:28 2007
+--- UISliderControl.h	Tue Sep 11 00:02:48 2007
+***************
+*** 77,83 ****
+  - (void)setValue:(float)fp8 animated:(BOOL)fp12 animationCurve:(int)fp16;	// IMP=0x32449dbc
+  - (struct CGRect)sliderBounds;	// IMP=0x32449ff0
+  - (void)sliderBoundsChanged;	// IMP=0x324496c4
+! - (float)value;	// IMP=0x32449fe8
+  - (struct CGRect)valueTextBounds;	// IMP=0x3244aee4
+  
+  @end
+--- 77,83 ----
+  - (void)setValue:(float)fp8 animated:(BOOL)fp12 animationCurve:(int)fp16;	// IMP=0x32449dbc
+  - (struct CGRect)sliderBounds;	// IMP=0x32449ff0
+  - (void)sliderBoundsChanged;	// IMP=0x324496c4
+! - (long)value;	// IMP=0x32449fe8
+  - (struct CGRect)valueTextBounds;	// IMP=0x3244aee4
+  
+  @end

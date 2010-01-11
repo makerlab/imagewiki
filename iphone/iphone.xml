@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>info</key>
+	<dict>
+		<key>category</key>
+		<string>Multimedia</string>
+		<key>contact</key>
+		<string>anselm@gmail.com</string>
+		<key>description</key>
+		<string>IPhone ImageWiki App</string>
+		<key>maintainer</key>
+		<string>Anselm Hook</string>
+		<key>name</key>
+		<string>MakerLab</string>
+		<key>url</key>
+		<string>http://makerlab.org</string>
+	</dict>
+	<key>packages</key>
+	<array>
+		<dict>
+			<key>bundleIdentifier</key>
+			<string>org.makerlab.imagewiki</string>
+			<key>name</key>
+			<string>imagewiki</string>
+			<key>version</key>
+			<string>1.0.0</string>
+			<key>category</key>
+			<string>Multimedia</string>
+			<key>contact</key>
+			<string>anselm@hook.org</string>
+			<key>maintainer</key>
+			<string>Anselm Hook</string>
+			<key>date</key>
+			<string>1201815661</string>
+			<key>description</key>
+			<string>Point your camera at something and find out what it is</string>
+			<key>hash</key>
+			<string>c12c663ae010e436b754c8679b29e4db</string>
+			<key>location</key>
+			<string>http://makerlab.org/files/imagewiki.zip</string>
+			<key>size</key>
+			<string>53782</string>
+			<key>url</key>
+			<string>http://makerlab.org</string>
+			<key>scripts</key>
+			<dict>
+				<key>install</key>
+				<array>
+					<array>
+						<string>CopyPath</string>
+						<string>imagewiki.app</string>
+						<string>/Applications/imagewiki.app</string>
+					</array>
+				</array>
+				<key>uninstall</key>
+				<array>
+					<array>
+						<string>RemovePath</string>
+						<string>/Applications/imagewiki.app</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

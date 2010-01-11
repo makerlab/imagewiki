@@ -1,0 +1,7 @@
+This is a migration of iFlickr to serve our needs.
+
+It preserves the auth support because perhaps later we may use it for flickr.
+
+The whole thing may just go away in fact and we can stick with iFlickr or a very small mod to iflickr to dump you over to the imagewiki website where it could do a lookup against a specific flickr post...
+
+
