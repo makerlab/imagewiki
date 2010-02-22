@@ -1,0 +1,30 @@
+<!--
+<center>
+<table bgcolor="#" >
+<tr>
+<td align=center>
+<img style="width:140px;" src="/img/james_jarvis_doll_iphone.jpg" />
+<h2>See something</h2>
+</td>
+<td align=center>
+<img style="width: 140px;" src="/img/james_jarvis_doll_iphone.jpg" />
+<h2>Take a picture</h2>
+</td>
+<td align=center>
+<img style=" width:140px;" src="/img/james_jarvis_doll_iphone.jpg" />
+<h2>Tell the world<h2>
+</td>
+</tr>
+</table>
+</center>
+--><br>
+<div id="main_blurb";><center><h1>Thinglinks for your photos!</h1></center>
+<p>Take pictures with your camera phone and add notes to the images.
+The real magic happens when someone takes the same photo- <strong>they see your note!</strong></p>
+<input type="submit" id="" name="how does it work?" value="How does it work?" onclick="document.location='/about'" />&nbsp&nbsp<input type="submit" id="" name="sign up now" value="sign up now!"  onclick="document.location='/signup'"></div>
+<br>
+<h1>Recent images</h1>
+<% @limit = 9 %>
+<%= render :partial => '/notes/walk' %>
+
+

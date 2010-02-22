@@ -1,0 +1,57 @@
+<%
+
+# A bit of ruby code to step in and set header properties if not specified elsewhere
+if !defined?(@site_metatags)
+    @site_metatags = "Visual Search, Image Wiki, Crowd Source, mobile, mobile apps, mobil
+e development, OS, Community Data, Social, Cartography, GEO, image searching, GIS, photos
+, paige saez, anselm hook, ben foote, marlin pohlman, john wiseman, iphone apps, thing li
+nks, physical hyperlinks, ambient computing"
+end
+
+if !defined?(@site_title)
+  @site_title = "ImageWiki"
+end
+
+-%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title><%=@site_title%></title>
+<meta name = "viewport" content = "width=480" > 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="description" content="<%=@site_metatags%>"><link rel="icon" href="/images/eye_icon.png" type="image/png"/> 
+<link type="text/css" title="makerlab" rel="Stylesheet" media="screen" href="/stylesheets/master.css"/>
+</head>
+<body>
+
+<%= render :partial => '/layouts/header' %>
+
+<div id="content" class="group">
+<%= yield %>
+</div>
+
+<div id="footer" style="clear:both">
+<br/>
+<br/>
+<br/>
+<ul class="nav">
+<li><a href="http://blog.makerlab.org">Our Blog</a></li>
+<li><%= link_to 'About', "/about" %></li>
+<li><%= link_to 'Help!', "/help" %></li>
+</ul>
+<div style="clear:both;"/>
+</div>
+
+</div><!-- wrapper -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-846275-10");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

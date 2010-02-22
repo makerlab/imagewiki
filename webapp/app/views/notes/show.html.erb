@@ -1,0 +1,7 @@
+<h1>Show Note</h1>
+<% @interactive = 0 %>
+<% form_for(@note, :url => "/notes/create", :html => { :multipart => true } ) do |f| %>
+<%= render :partial => "form", :object => f %>
+<% end %>
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

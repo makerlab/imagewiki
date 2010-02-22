@@ -1,0 +1,10 @@
+<h1>Edit Account</h1>
+
+<% form_for ( @user, :url => "/users/#{@user.login}", :html => { :multipart => true } ) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <br/>
+  <br/>
+  <%= f.submit "Update" %>
+<% end %>
+ 

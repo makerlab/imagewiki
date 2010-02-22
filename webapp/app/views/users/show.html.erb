@@ -1,0 +1,24 @@
+<%= render :partial => '/users/icon', :locals => { :user => @user } %>
+
+<%if @user == current_user || ( current_user && current_user.admin == true ) -%>
+<%= link_to 'Edit', "/users/edit/#{@user.login}" %>
+<%= link_to "Delete", {:action => "delete", :id => @user.login}, :confirm => "Are you sure!?" %>
+<% end -%>
+
+<h1>Recent Activity for <%=@user.login%></h1>
+<%= render :partial => "list", :locals => { :user => @user } %>
+
+<% if current_user && current_user.admin %>
+<h2>Administrative details</h2>
+<table border=1>
+<tr><td bgcolor=grey>Login</td><td><%=@user.login%></td></tr>
+<tr><td bgcolor=grey>Login count</td><td><%=@user.login_count%></td></tr>
+<tr><td bgcolor=grey>Login request time</td><td><%=@user.last_request_at%></td></tr>
+<tr><td bgcolor=grey>Login last </td><td><%=@user.last_login_at%></td></tr>
+<tr><td bgcolor=grey>Login current </td><td><%=@user.current_login_at%></td></tr>
+<tr><td bgcolor=grey>Login last ip</td><td><%=@user.last_login_ip%></td></tr>
+<tr><td bgcolor=grey>Login current ip</td><td><%=@user.current_login_ip%></td></tr>
+</tr>
+</table>
+<% end %>
+

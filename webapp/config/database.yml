@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  database: imagewiki
+  username: imagewiki
+  password: imagewiki
+
+production:
+  adapter: postgresql
+  database: imagewiki
+  username: imagewiki
+  password: imagewiki
+
+test:
+  adapter: postgresql
+  database: imagewikitest
+  username: imagewiki
+  password: imagewiki
+

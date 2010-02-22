@@ -1,0 +1,77 @@
+<h1>Wherecamp ISpy</h1>
+
+The goal of the game is to find 5 images that we have hidden on people around the wherecampus.
+
+<h1>How to play</h1>
+
+1) Ask Paige or Anselm for an account
+<br/>
+<br/>
+2) Download the iphone client from <a href="http://makerlab.org/iphone.xml">makerlab.org/iphone.xml</a>.  You need to add this to your community sources on your cracked iphone and then install it from the multimedia area.  If you need help cracking your phone please talk to Paige or Anselm.  The client will let you take a picture of something and it will send you to a web page that shows you what it thinks is the best match.  You will know if you got the match right (or if the server got the match wrong.
+<br/>
+<br/>
+3) You can also just email the imagewiki if you don't want to fetch the client.  The email address for doing a search is "flo@imagewiki.org". You just take a picture with your phone and then submit that picture as an email.  The server will respond with links to the best matches.
+
+<br/>
+<br/>
+4) The first person to get all 5 pictures wins dinner with JASON WILSON FROM PLATIAL!!!! WOW!!!!
+<br/>
+<br/>
+5) Each picture has a hint about the next picture.  Here are some hints:  5.1) this shirt has a cold war feel 5.2) this shirt has a classic feel from yesteryear  5.3) this shirt comes from francophone quebec 5.4) this image has personal meaning 5.5) this image may someday lead our country. 5.6) This is a bonus shirt gooo Barcelona Futbol!!!
+<br/>
+<br/>
+6) Expect lots of problems, bugs, wrong search results; that is the whole point - to mess around have fun and play.  It should be pretty easy to fix things if things break and just keep in mind the entire project is just a couple of weeks old.
+<br/>
+<h1>Quotes</h1>
+
+<i>That's fun!!!! - Mikel</i>
+
+<h1>Leaderboard - Score out of a maximum of 5</h1>
+
+<%
+
+players = [ User.find_by_id(20),
+            User.find_by_id(21),
+            User.find_by_id(22),
+            User.find_by_id(23),
+            User.find_by_id(24),
+            User.find_by_id(25)
+          ] 
+
+matches = [ Note.find_by_id(310),
+            Note.find_by_id(309),
+            Note.find_by_id(308),
+            Note.find_by_id(304),
+            Note.find_by_id(177),
+            Note.find_by_id(307)
+          ]
+
+str = "<table>"
+
+[].each do |p|
+  searches = Note.find_all_by_user(p.id) #(:all,:conditions=>["user = ?",p.id])
+    t = 0
+    t = -1 if p.id == 21
+    t = 1 if p.id == 22
+    best = [ 310, 309, 308, 304, 177, 307 ]
+    searches.each do |s|
+    results = Note.find_similar(s)
+    results[0..3].each do |r|
+      if best.include?(r.id)
+       best.delete(r.id)
+       t = t + 1
+      end 
+    end
+  end
+  str = "#{str}<tr><td>#{p.login}&nbsp;</td><td> #{t}</td></tr>"
+end 
+
+%>
+
+<%= str %>
+<tr><td>amoeda&nbsp;</td><td> 5</td></tr>
+<tr><td>jasonwilson&nbsp;</td><td> 3</td></tr><tr><td>mpfister&nbsp;</td><td> 2</td></tr>
+<tr><td>brandon&nbsp;</td><td> 1</td></tr><tr><td>deleted&nbsp;</td><td> 1</td></tr><tr><td>michimatthews&nbsp;</td><td> 0</td></tr>
+</table>
+
+

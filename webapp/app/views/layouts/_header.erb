@@ -1,0 +1,25 @@
+<div id="wrapper">
+<div id="top_nav">
+<div style="float:left;"><a href="/"><img style="width: 183px; height: 34px; margin-right: 10px;" alt="imagewiki" src="/img/logo_small.png
+"></a> </div>
+<ul id="top_nav_list" class="nav group">
+<% if !current_user %>
+<li><%= link_to 'Sign up', "/signup" %> </li>
+<li><%= link_to 'Sign in', "/signin" %> </li>
+<li><%= link_to 'Add', "/signin" %> </li>
+<li><%= link_to 'Search', "/search" %> </li>
+<li><%= link_to 'Recent', "/recent" %></li>
+<% else %>
+<li><%= link_to 'Sign out', "/signout" , :method => :delete %> </li>
+<li><%= link_to 'Search', "/search" %> </li>
+<li><%= link_to 'Add', "/add" %> </li>
+<li>Hi <%= link_to current_user.login.capitalize,"/users/#{current_user}" %>!</li>
+<% end %>
+</div>
+<div style="clear:both"></div>
+<% if flash[:notice] || flash[:warning] %>
+<h1><font style="color:green"><%= flash[:notice] %></font></h1>
+<h1><font style="color: red"><%= flash[:warning] %></font></h1>
+<% end %>
+
+
