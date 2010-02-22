@@ -1,6 +1,4 @@
 scratch
-website/public/imagedb/*
-website/scratch
 engine/src/*.o
 image.db
 engine_logging_file.log
@@ -27,3 +25,17 @@ public/restart.txt
 public/stylesheets/compiled
 tmp
 app/stylesheets
+
+website/logging
+website/public/stylesheets/compiled/*
+website/log/*.log
+website/tmp/**/*
+website/public/system/photos/*
+website/public/photos/*
+website/public/system/**/*
+website/db/schema.rb
+website/public/restart.txt
+website/public/stylesheets/compiled
+website/tmp
+website/scratch
+website/public/imagedb/*
