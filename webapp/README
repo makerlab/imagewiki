@@ -1,0 +1,26 @@
+===============
+HOW TO INSTALL
+===============
+
+This is a pretty straightforward rails app. You'll need a few gems,
+
+   gem install sanitize
+   port install imagemagick
+   gem install json-pure
+   gem install paperclip
+
+Setup your database as usual,
+
+   su - pgsql
+   createuser -P imagewiki imagewiki
+   createdb -O imagewiki imagewiki
+
+And, to actually run it,
+
+   rake db:migrate
+   script/server start
+
+And then to see it go here in your browser
+
+   http://localhost:3000
+
