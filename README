@@ -31,6 +31,9 @@ Please feel free to support us or provide feedback.  You can email me at:
 Contents
 ============
 
+/webapp - a version in ruby on rails that was started feb 2010
+          a work in progress - don't use
+
 /website - this is the merb site itself
           currently this is a vanilla mvc pattern
           we'll probably use merb slices later
